@@ -25,9 +25,6 @@ public class CoinToss extends ScriptTransaction {
     // Key used in unlocking script to select winning player.
     private final ECKey winningPlayerKey;
 
-    private final byte[] aliceCommitment;
-    private final byte[] bobCommitment;
-
     private CoinToss(
             WalletKit walletKit, NetworkParameters parameters,
             ECKey aliceKey, byte[] aliceNonce,
@@ -40,19 +37,16 @@ public class CoinToss extends ScriptTransaction {
         this.bobKey = bobKey;
         this.bobNonce = bobNonce;
         this.winningPlayerKey = winningPlayerKey;
-
-        this.aliceCommitment = Utils.sha256hash160(aliceNonce);
-        this.bobCommitment = Utils.sha256hash160(bobNonce);
     }
 
     @Override
     public Script createLockingScript() {
         return new ScriptBuilder()
                 .op(OP_HASH160)
-                .data(aliceCommitment)
+                .data(Utils.sha256hash160(aliceNonce))
                 .op(OP_EQUALVERIFY)
                 .op(OP_HASH160)
-                .data(bobCommitment)
+                .data(Utils.sha256hash160(bobNonce))
                 .op(OP_EQUALVERIFY)
                 .data(aliceNonce.length == bobNonce.length ? aliceKey.getPubKey() : bobKey.getPubKey())
                 .op(OP_CHECKSIG)
