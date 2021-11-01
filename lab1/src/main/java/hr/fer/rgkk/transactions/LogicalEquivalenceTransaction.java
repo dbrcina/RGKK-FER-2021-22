@@ -5,6 +5,8 @@ import org.bitcoinj.core.Transaction;
 import org.bitcoinj.script.Script;
 import org.bitcoinj.script.ScriptBuilder;
 
+import static org.bitcoinj.script.ScriptOpCodes.*;
+
 public class LogicalEquivalenceTransaction extends ScriptTransaction {
 
     public LogicalEquivalenceTransaction(WalletKit walletKit, NetworkParameters parameters) {
@@ -13,8 +15,20 @@ public class LogicalEquivalenceTransaction extends ScriptTransaction {
 
     @Override
     public Script createLockingScript() {
-        // TODO: Create Locking script
-        throw new UnsupportedOperationException();
+        return new ScriptBuilder()
+                .op(OP_2DUP)
+                .number(0)
+                .number(2)
+                .op(OP_WITHIN)
+                .number(1)
+                .op(OP_EQUALVERIFY)
+                .number(0)
+                .number(2)
+                .op(OP_WITHIN)
+                .number(1)
+                .op(OP_EQUALVERIFY)
+                .op(OP_EQUAL)
+                .build();
     }
 
     @Override
@@ -26,4 +40,5 @@ public class LogicalEquivalenceTransaction extends ScriptTransaction {
                 .number(y)
                 .build();
     }
+
 }
