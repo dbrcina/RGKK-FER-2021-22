@@ -52,9 +52,9 @@ public class ScriptTest {
                 });
     }
 
-    //////////////////////////////////
-    // Pay to public key hash tests //
-    //////////////////////////////////
+    //////////////////////
+    // PayToPubKey test //
+    //////////////////////
 
     @Test
     public void testPayToPubKey() {
@@ -66,10 +66,9 @@ public class ScriptTest {
         }
     }
 
-
-    //////////////////////////////////
-    // Pay to public key hash tests //
-    //////////////////////////////////
+    //////////////////////////
+    // PayToPubKeyHash test //
+    //////////////////////////
 
     @Test
     public void testPayToPubKeyHash() {
@@ -80,10 +79,9 @@ public class ScriptTest {
             Assert.fail(e.getMessage());
         }
     }
-
-    //////////////////////////////////
-    // Linear equation tests        //
-    //////////////////////////////////
+    //////////////////////////////
+    // Logical equivalence test //
+    //////////////////////////////
 
     @Test
     public void testLogicalEquivalence() {
@@ -95,9 +93,9 @@ public class ScriptTest {
         }
     }
 
-    //////////////////////////////////
-    // Odds and even tests          //
-    //////////////////////////////////
+    /////////////////////
+    // Coin toss tests //
+    /////////////////////
 
     @Test
     public void testTailPlayerWinsWithTwoZeros() {
@@ -125,7 +123,7 @@ public class ScriptTest {
                 WinningPlayer.HEAD
         )) {
             testTransaction(coinToss);
-            Assert.fail("This is OK, Head player should loose.");
+            Assert.fail("Head player should loose.");
         } catch (Exception ignore) {
         }
     }
@@ -153,10 +151,10 @@ public class ScriptTest {
                 networkParameters,
                 CoinTossChoice.ONE,
                 CoinTossChoice.ONE,
-                WinningPlayer.TAIL
+                WinningPlayer.HEAD
         )) {
             testTransaction(coinToss);
-            Assert.fail("This is OK, Head player should loose.");
+            Assert.fail("Head player should loose.");
         } catch (Exception ignore) {
         }
     }
@@ -168,10 +166,10 @@ public class ScriptTest {
                 networkParameters,
                 CoinTossChoice.ZERO,
                 CoinTossChoice.ONE,
-                WinningPlayer.HEAD
+                WinningPlayer.TAIL
         )) {
             testTransaction(coinToss);
-            Assert.fail("This is OK, Tail player should loose");
+            Assert.fail("Tail player should loose");
         } catch (Exception ignore) {
         }
     }
@@ -199,10 +197,10 @@ public class ScriptTest {
                 networkParameters,
                 CoinTossChoice.ONE,
                 CoinTossChoice.ZERO,
-                WinningPlayer.HEAD
+                WinningPlayer.TAIL
         )) {
             testTransaction(coinToss);
-            Assert.fail("This is OK, Tail player should loose");
+            Assert.fail("Tail player should loose");
         } catch (Exception ignore) {
         }
     }

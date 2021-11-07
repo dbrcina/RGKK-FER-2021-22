@@ -3,7 +3,6 @@ package hr.fer.rgkk.transactions;
 import org.bitcoinj.core.ECKey;
 import org.bitcoinj.core.NetworkParameters;
 import org.bitcoinj.core.Transaction;
-import org.bitcoinj.crypto.TransactionSignature;
 import org.bitcoinj.script.Script;
 import org.bitcoinj.script.ScriptBuilder;
 
@@ -19,7 +18,6 @@ public class PayToPubKeyHash extends ScriptTransaction {
 
     @Override
     public Script createLockingScript() {
-        // OP_DUP OP_HASH160 <PubKeyHash> OP_EQUALVERIFY OP_CHECKSIG
         return new ScriptBuilder()
                 .op(OP_DUP)
                 .op(OP_HASH160)
@@ -31,10 +29,8 @@ public class PayToPubKeyHash extends ScriptTransaction {
 
     @Override
     public Script createUnlockingScript(Transaction unsignedTransaction) {
-        // <sig> <PubKey>
-        TransactionSignature txSig = sign(unsignedTransaction, key);
         return new ScriptBuilder()
-                .data(txSig.encodeToBitcoin())
+                .data(sign(unsignedTransaction, key).encodeToBitcoin())
                 .data(key.getPubKey())
                 .build();
     }
