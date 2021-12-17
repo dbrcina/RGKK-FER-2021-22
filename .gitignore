@@ -1,4 +1,8 @@
-.idea
+.idea/
+target/
+wallet/
+node_modules/
+.vscode/
+build/
 *.iml
-target
-wallet
+package-lock.json

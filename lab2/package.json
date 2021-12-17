@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "name": "rgkk-lab2",
+  "version": "1.0.0",
+  "dependencies": {
+    "truffle": "5.4.16",
+    "ganache-cli": "6.12.2"
+  },
+  "scripts": {
+    "start": "ganache-cli -l 1000000000000 -g 10 --allowUnlimitedContractSize",
+    "test": "truffle test"
+  }
+}
